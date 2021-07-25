@@ -28,24 +28,16 @@
 
 enum planck_layers {
   _BASE,
-  _GAME,
   _MEDIA,
   _NAV,
   _MOUSE,
   _SYM,
   _NUM,
-  _FUN
+  _FUN,
+  _GAME,
+  _GAME_ALT,
+  _MUS
 };
-/*
-  _BASE,
-  _COLEMAK,
-  _DVORAK,
-  _LOWER,
-  _RAISE,
-  _PLOVER,
-  _ADJUST
-};
-*/
 
 enum planck_keycodes {
   GAME = SAFE_RANGE,
@@ -56,10 +48,10 @@ enum planck_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_grid(
-    KC_Q,              KC_W,              KC_F,              KC_P,              KC_B,              GAME,              U_NA,              KC_J,              KC_L,              KC_U,              KC_Y,              KC_QUOT,
+    KC_Q,              KC_W,              KC_F,              KC_P,              KC_B,              U_NA,              U_NA,              KC_J,              KC_L,              KC_U,              KC_Y,              KC_QUOT,
     LGUI_T(KC_A),      LALT_T(KC_R),      LCTL_T(KC_S),      LSFT_T(KC_T),      KC_G,              U_NA,              U_NA,              KC_M,              LSFT_T(KC_N),      LCTL_T(KC_E),      LALT_T(KC_I),      LGUI_T(KC_O),
     KC_Z,              ALGR_T(KC_X),      KC_C,              KC_D,              KC_V,              U_NA,              U_NA,              KC_K,              KC_H,              KC_COMM,           ALGR_T(KC_DOT),    KC_SLSH,
-    U_NA,              U_NA,              LT(_MEDIA, KC_ESC),LT(_NAV, KC_SPC),  LT(_MOUSE, KC_TAB),U_NA,              U_NA,              LT(_SYM, KC_ENT),  LT(_NUM, KC_BSPC), LT(_FUN, KC_DEL),   U_NA,              U_NA
+    MU_ON,             U_NA,              LT(_MEDIA, KC_ESC),LT(_NAV, KC_SPC),  LT(_MOUSE, KC_TAB),U_NA,              U_NA,              LT(_SYM, KC_ENT),  LT(_NUM, KC_BSPC), LT(_FUN, KC_DEL),  U_NA,             GAME
 ),
 
 [_NAV] = LAYOUT_planck_grid(
@@ -105,20 +97,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_GAME] = LAYOUT_planck_grid(
-    KC_F1,   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,   KC_4,   KC_8,    KC_EQL,  KC_F8,    KC_F12,  KC_BSPC,
-    KC_F2,   KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,   KC_3,   KC_7,    KC_MINS, KC_F7,    KC_F11,  KC_SLSH,
-    KC_F3,   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_2,   KC_6,    KC_0,    KC_F6,    KC_F10,  KC_ENT,
-    KC_F4,   KC_LCTL, KC_ESC,  KC_GRV,  KC_LALT, KC_SPC, KC_1,   KC_5,    KC_9,    KC_F5,    KC_F9,   GAME_EXIT
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+    KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+    KC_LCTL, KC_DEL,  KC_LGUI, KC_LALT, KC_SPC,  MO(_GAME_ALT), KC_PSCR, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, GAME_EXIT
 ),
 
-/*
-[_ADJUST] = LAYOUT_planck_grid(
-    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, BASE,    COLEMAK,  DVORAK,  PLOVER,  _______,
-    _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
-)
-*/
+[_GAME_ALT] = LAYOUT_planck_grid(
+  _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, _______, _______, KC_GRV,
+  KC_RSFT, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_BSLS, _______,
+  KC_RCTL, KC_INS,  KC_RGUI, KC_LALT, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______
+),
+
+[_MUS] = LAYOUT_planck_grid(
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    MU_OFF,MU_MOD,KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+),
 
 };
 
@@ -141,18 +138,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-/*
-#ifdef AUDIO_ENABLE
-  float plover_song[][2]     = SONG(PLOVER_SOUND);
-  float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-#endif
-*/
-
-/*
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-}
-*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -168,176 +153,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-/*
-    case COLEMAK:
+    case MU_ON:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(_COLEMAK);
+        layer_on(_MUS);
       }
-      return false;
-      break;
-    case DVORAK:
+      return true;
+    case MU_OFF:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(_DVORAK);
+        layer_off(_MUS);
       }
-      return false;
-      break;
-    case BACKLIT:
-      if (record->event.pressed) {
-        register_code(KC_RSFT);
-        #ifdef BACKLIGHT_ENABLE
-          backlight_step();
-        #endif
-        #ifdef KEYBOARD_planck_rev5
-          writePinLow(E6);
-        #endif
-      } else {
-        unregister_code(KC_RSFT);
-        #ifdef KEYBOARD_planck_rev5
-          writePinHigh(E6);
-        #endif
-      }
-      return false;
-      break;
-    case PLOVER:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          stop_all_notes();
-          PLAY_SONG(plover_song);
-        #endif
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_off(_ADJUST);
-        layer_on(_PLOVER);
-        if (!eeconfig_is_enabled()) {
-            eeconfig_init();
-        }
-        keymap_config.raw = eeconfig_read_keymap();
-        keymap_config.nkro = 1;
-        eeconfig_update_keymap(keymap_config.raw);
-      }
-      return false;
-      break;
-    case EXT_PLV:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(plover_gb_song);
-        #endif
-        layer_off(_PLOVER);
-      }
-      return false;
-      break;
-*/
+      return true;
   }
   return true;
 }
-
-/*
-bool muse_mode = false;
-uint8_t last_muse_note = 0;
-uint16_t muse_counter = 0;
-uint8_t muse_offset = 70;
-uint16_t muse_tempo = 50;
-*/
-
-/*
-bool encoder_update(bool clockwise) {
-  if (muse_mode) {
-    if (IS_LAYER_ON(_RAISE)) {
-      if (clockwise) {
-        muse_offset++;
-      } else {
-        muse_offset--;
-      }
-    } else {
-      if (clockwise) {
-        muse_tempo+=1;
-      } else {
-        muse_tempo-=1;
-      }
-    }
-  } else {
-    if (clockwise) {
-      #ifdef MOUSEKEY_ENABLE
-        tap_code(KC_MS_WH_DOWN);
-      #else
-        tap_code(KC_PGDN);
-      #endif
-    } else {
-      #ifdef MOUSEKEY_ENABLE
-        tap_code(KC_MS_WH_UP);
-      #else
-        tap_code(KC_PGUP);
-      #endif
-    }
-  }
-    return true;
-}
-*/
-
-/*
-void dip_switch_update_user(uint8_t index, bool active) {
-    switch (index) {
-        case 0: {
-#ifdef AUDIO_ENABLE
-            static bool play_sound = false;
-#endif
-            if (active) {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_song); }
-#endif
-                layer_on(_ADJUST);
-            } else {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_gb_song); }
-#endif
-                layer_off(_ADJUST);
-            }
-#ifdef AUDIO_ENABLE
-            play_sound = true;
-#endif
-            break;
-        }
-        case 1:
-            if (active) {
-                muse_mode = true;
-            } else {
-                muse_mode = false;
-            }
-    }
-}
-*/
-
-/*
-void matrix_scan_user(void) {
-#ifdef AUDIO_ENABLE
-    if (muse_mode) {
-        if (muse_counter == 0) {
-            uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-            if (muse_note != last_muse_note) {
-                stop_note(compute_freq_for_midi_note(last_muse_note));
-                play_note(compute_freq_for_midi_note(muse_note), 0xF);
-                last_muse_note = muse_note;
-            }
-        }
-        muse_counter = (muse_counter + 1) % muse_tempo;
-    } else {
-        if (muse_counter) {
-            stop_all_notes();
-            muse_counter = 0;
-        }
-    }
-#endif
-}
-*/
-
-/*
-bool music_mask_user(uint16_t keycode) {
-  switch (keycode) {
-    case RAISE:
-    case LOWER:
-      return false;
-    default:
-      return true;
-  }
-}
-*/
