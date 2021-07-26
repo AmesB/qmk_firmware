@@ -4,6 +4,7 @@ AUTO_SHIFT_ENABLE = no # Auto Shift
 RGBLIGHT_ENABLE = no # disable basic rgb features
 RGB_MATRIX_ENABLE = yes # enable rgb advanced features
 AUDIO_ENABLE = yes # enable the speaker for music mode etc
+MIDI_ENABLE = yes # allow the keyboard to act as a midi controller
 
 # Stuff for playing music in music mode
 
