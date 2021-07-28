@@ -17,9 +17,6 @@
 #include QMK_KEYBOARD_H
 #include "muse.h"
 
-#define U_NA KC_NO // present but not available for use
-#define U_NU KC_NO // available but not used
-
 #define U_RDO KC_AGIN
 #define U_PST KC_PSTE
 #define U_CPY KC_COPY
@@ -34,10 +31,10 @@
 
 enum planck_layers {
   _BASE,
-  _MEDIA,
+//  _MEDIA,
   _NAV,
-  _MOUSE,
-  _SYM,
+//  _MOUSE,
+//  _SYM,
   _NUM,
   _FUN,
   _GAME,
@@ -55,52 +52,31 @@ enum planck_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_grid(
-    KC_Q,              KC_W,              KC_F,              KC_P,              KC_B,              U_NA,              U_NA,              KC_J,              KC_L,              KC_U,              KC_Y,              KC_QUOT,
-    LGUI_T(KC_A),      LALT_T(KC_R),      LCTL_T(KC_S),      LSFT_T(KC_T),      KC_G,              U_NA,              U_NA,              KC_M,              LSFT_T(KC_N),      LCTL_T(KC_E),      LALT_T(KC_I),      LGUI_T(KC_O),
-    KC_Z,              ALGR_T(KC_X),      KC_C,              KC_D,              KC_V,              U_NA,              U_NA,              KC_K,              KC_H,              KC_COMM,           ALGR_T(KC_DOT),    KC_SLSH,
-    MU_ON,             MI_ON,             LT(_MEDIA, KC_ESC),LT(_NAV, KC_SPC),  LT(_MOUSE, KC_TAB),U_NA,              U_NA,              LT(_SYM, KC_ENT),  LT(_NUM, KC_BSPC), LT(_FUN, KC_DEL),  U_NA,             GAME
+    KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,             XXXXXXX, XXXXXXX, KC_J,             KC_L,         KC_U,         KC_Y,           KC_QUOT,
+    LSFT_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LGUI_T(KC_T), KC_G,             XXXXXXX, XXXXXXX, KC_M,             RGUI_T(KC_N), RCTL_T(KC_E), RALT_T(KC_I),   RSFT_T(KC_O),
+    KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,             XXXXXXX, XXXXXXX, KC_K,             KC_H,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,
+    MU_ON,        MI_ON,        KC_ESC,       KC_SPC,       LT(_NAV, KC_TAB), XXXXXXX, XXXXXXX, LT(_NUM, KC_DEL), KC_BSPC,      KC_ENT,       XXXXXXX,        GAME
 ),
 
 [_NAV] = LAYOUT_planck_grid(
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, U_NA,    U_NA,   U_NA,   KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
-    U_NA,    KC_ALGR, U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   KC_ENT,  KC_BSPC, KC_DEL,  U_NA,    U_NA
-),
-
-[_MOUSE] = LAYOUT_planck_grid(
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, U_NA,    U_NA,   U_NA,   U_NU,    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,
-    U_NA,    KC_ALGR, U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   U_NU,    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R,
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   KC_BTN1, KC_BTN3, KC_BTN2, U_NA,    U_NA
-),
-
-[_MEDIA] = LAYOUT_planck_grid(
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI,
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, U_NA,    U_NA,   U_NA,   U_NU,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,
-    U_NA,    KC_ALGR, U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   U_NU,    U_NU,    U_NU,    U_NU,    U_NU,
-    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NA,   U_NA,   KC_MSTP, KC_MPLY, KC_MUTE, U_NA,    U_NA
+    _______, _______, _______, _______, _______, _______, _______, U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
+    KC_LSFT, KC_LALT, KC_LCTL, KC_LGUI, _______, _______, _______, KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
+    _______, _______, _______, _______, _______, _______, _______, KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, KC_DEL,  _______, _______, XXXXXXX, XXXXXXX
 ),
 
 [_NUM] = LAYOUT_planck_grid(
-    KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    RESET,
-    KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,  U_NA,   U_NA,   U_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    KC_ALGR, U_NA,
-    U_NA,    U_NA,    KC_DOT,  KC_0,    KC_MINS, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    U_NA
-),
-
-[_SYM] = LAYOUT_planck_grid(
-    KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    RESET,
-    KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, U_NA,   U_NA,   U_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    KC_ALGR, U_NA,
-    U_NA,    U_NA,    KC_LPRN, KC_RPRN, KC_UNDS, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    U_NA
+    KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC, _______, _______, _______, _______, _______, _______, RESET,
+    KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,  _______, _______, _______, KC_RGUI, KC_RCTL, KC_RALT, KC_RSFT,
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, _______, _______, _______, _______, _______, _______, _______,
+    XXXXXXX, XXXXXXX, MO(_FUN),KC_0,    KC_MINS, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
 [_FUN] = LAYOUT_planck_grid(
-    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    RESET,
-    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK, U_NA,   U_NA,   U_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-    KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    KC_ALGR, U_NA,
-    U_NA,    U_NA,    KC_APP,  KC_SPC,  KC_TAB,  U_NA,   U_NA,   U_NA,    U_NA,    U_NA,    U_NA,    U_NA
+    KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, _______, _______, _______, _______, _______, _______, RESET,
+    KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK, _______, _______, _______, KC_RGUI, KC_RCTL, KC_RALT, KC_RSFT,
+    KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, _______, _______, _______, _______, _______, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
 [_GAME] = LAYOUT_planck_grid(
