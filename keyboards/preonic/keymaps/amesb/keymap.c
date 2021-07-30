@@ -15,7 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "muse.h"
+#define GAME_COLOR 0x0a, 0x00, 0xff
 
 enum preonic_layers {
   _COLEMAK,
@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,        KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_ESC,
   KC_BSPC,       KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   OSM(MOD_LSFT), KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-  KC_CAPS, OSM(MOD_LCTL), KC_LGUI, KC_LALT, KC_SPC,  LOWER,   RAISE,   KC_BSPC, KC_DEL,  QWERTY,  OSM(MOD_RCTL), OSM(MOD_RSFT)
+  KC_CAPS,       KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,  LOWER,   RAISE,   KC_BSPC, KC_DEL,  QWERTY,  KC_RCTL, KC_RSFT
 ),
 
 [_QWERTY] = LAYOUT_preonic_grid(
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJUST] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-  _______, RESET,   DEBUG,   _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______, RESET,   DEBUG,   _______, _______, _______, RGB_MOD, RGB_SAI, RGB_SAI, RGB_VAI, RGB_TOG, _______,
   _______, AG_NORM, AG_SWAP, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -77,6 +77,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 };
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    switch(get_highest_layer(layer_state|default_layer_state)) {
+        case _QWERTY:
+            for (uint8_t i = led_min; i <= led_max; i++) {
+                rgb_matrix_set_color(i, GAME_COLOR);
+            }
+            break;
+    }
+
+    if (host_keyboard_led_state().caps_lock) {
+        for (uint8_t i = led_min; i <= led_max; i++) {
+            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+                rgb_matrix_set_color(i, 0xff, 0x00, 0x00);
+            }
+        }
+    }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {

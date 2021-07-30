@@ -39,3 +39,11 @@
 // One Shot Modifier (sticky keys) settings
 //#define ONESHOT_TAP_TOGGLE 3
 //#define ONESHOT_TIMEOUT 1000
+
+// NKRO override
+#define FORCE_NKRO
+
+// force OSM to activate faster
+#undef TAPPING_TERM
+#define TAPPING_TERM 100
+
