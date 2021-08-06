@@ -134,7 +134,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     if (host_keyboard_led_state().caps_lock) {
-        for (uint8_t i = 6; i <= 7; i++) {
+        //for (uint8_t i = 6; i <= 7; i++) {
+        for (uint8_t i = 1; i <= 1; i++) {
             if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
                 rgb_matrix_set_color(i, 0xaa, 0x00, 0x00);
             }
