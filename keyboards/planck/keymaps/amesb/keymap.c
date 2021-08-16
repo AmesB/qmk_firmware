@@ -19,9 +19,9 @@
 
 // led color definitions
 #define GAME_COLOR 0x0a, 0x00, 0x0c
-#define GAME_COLOR 0x0a, 0x00, 0x0c
-#define GAME_COLOR 0x0a, 0x00, 0x0c
-#define GAME_COLOR 0x0a, 0x00, 0x0c
+#define NAV_COLOR 0x00, 0xaa, 0x00
+#define NUM_COLOR 0x00, 0x00, 0xaa
+#define FUN_COLOR 0x00, 0x88, 0x88
 #define MUS_COLOR 0x00, 0x00, 0x0c
 #define MIDI_COLOR 0x00, 0x0c, 0x0a
 #define OCTAVE_COLOR 0xaa, 0x00, 0x00
@@ -123,6 +123,21 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, GAME_COLOR);
             }
             break;
+        case _NAV:
+            for (uint8_t i = 7; i <= 7; i++) {
+                rgb_matrix_set_color(i, GAME_COLOR);
+            }
+            break;
+        case _NUM:
+            for (uint8_t i = 2; i <= 2; i++) {
+                rgb_matrix_set_color(i, GAME_COLOR);
+            }
+            break;
+        case _FUN:
+            for (uint8_t i = 1; i <= 1; i++) {
+                rgb_matrix_set_color(i, GAME_COLOR);
+            }
+            break;
         case _MUS:
             for (uint8_t i = led_min; i <= led_max; i++) {
                 rgb_matrix_set_color(i, MUS_COLOR);
@@ -140,7 +155,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     if (host_keyboard_led_state().caps_lock) {
         //for (uint8_t i = 6; i <= 7; i++) {
-        for (uint8_t i = 1; i <= 1; i++) {
+        for (uint8_t i = 8; i <= 8; i++) {
             if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
                 rgb_matrix_set_color(i, 0xaa, 0x00, 0x00);
             }
