@@ -125,17 +125,17 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
         case _NAV:
             for (uint8_t i = 7; i <= 7; i++) {
-                rgb_matrix_set_color(i, GAME_COLOR);
+                rgb_matrix_set_color(i, NAV_COLOR);
             }
             break;
         case _NUM:
             for (uint8_t i = 2; i <= 2; i++) {
-                rgb_matrix_set_color(i, GAME_COLOR);
+                rgb_matrix_set_color(i, NUM_COLOR);
             }
             break;
         case _FUN:
             for (uint8_t i = 1; i <= 1; i++) {
-                rgb_matrix_set_color(i, GAME_COLOR);
+                rgb_matrix_set_color(i, FUN_COLOR);
             }
             break;
         case _MUS:
