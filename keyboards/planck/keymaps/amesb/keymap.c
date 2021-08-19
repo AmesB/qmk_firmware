@@ -53,14 +53,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,     KC_LEFT, KC_RGHT, KC_J,     KC_L,         KC_U,         KC_Y,         KC_QUOT,
     LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), KC_G,     KC_UP,   KC_DOWN, KC_M,     RSFT_T(KC_N), RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O),
     KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,     KC_VOLD, KC_VOLU, KC_K,     KC_H,         KC_COMM,      KC_DOT,       KC_SLSH,
-    KC_ESC,       KC_DEL,       KC_CAPS,      MO(_NAV),     KC_SPC,   KC_TAB,  KC_MINS, KC_BSPC,  MO(_NUM),     KC_ENT,       MO(_FUN),     GAME
+    KC_ESC,       KC_DEL,       KC_CAPS,      KC_SPC,       KC_MINS,  MO(_NAV),KC_TAB,  MO(_NUM), KC_BSPC,      KC_ENT,       MO(_FUN),     GAME
 ),
 
 [_GAME] = LAYOUT_planck_grid(
     KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_LEFT, KC_RGHT, KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT,
     KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_DOWN, KC_UP,   KC_M,    KC_N,    KC_E,    KC_I,    KC_O,
     KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_VOLD, KC_VOLU, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,
-    KC_ESC,  KC_DEL,  KC_CAPS, MO(_NUM),KC_SPC,  KC_TAB,  KC_MINS, KC_BSPC, MO(_NUM),KC_ENT,  MO(_FUN),GAME_EXIT
+    KC_ESC,  KC_DEL,  KC_CAPS, KC_SPC,  KC_MINS, MO(_NUM),KC_TAB,  MO(_NUM),KC_BSPC, KC_ENT,  MO(_FUN),GAME_EXIT
 ),
 
 [_GAMETWO] = LAYOUT_planck_grid(
