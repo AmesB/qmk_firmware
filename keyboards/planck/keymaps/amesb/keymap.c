@@ -40,7 +40,9 @@ enum planck_layers {
 
 enum planck_keycodes {
   GAME = SAFE_RANGE,
-  GAME_EXIT
+  GAME_EXIT,
+  MOD,
+  ALT
 };
 
 
@@ -50,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,     KC_M,     KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
-    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  MO(_ALT), MO(_MOD), OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
+    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  ALT,      MOD,      OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
 [_GAME] = LAYOUT_planck_grid(
@@ -64,14 +66,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), _______, _______, RSFT_T(KC_N),  RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O),	_______, 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, XXXXXXX, MO(_FUN),_______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, MO(_FUN),XXXXXXX, _______, _______, _______, _______, _______
 ),
 
 [_ALT] = LAYOUT_planck_grid(
     KC_INS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
     KC_DEL,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
     _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, _______, _______, MO(_FUN),XXXXXXX, _______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, XXXXXXX, MO(_FUN),_______, _______, _______, _______, _______
 ),
 
 [_FUN] = LAYOUT_planck_grid(
@@ -153,6 +155,56 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
+static bool kc_a_state = false;
+static bool kc_r_state = false;
+static bool kc_s_state = false;
+static bool kc_t_state = false;
+static bool kc_n_state = false;
+static bool kc_e_state = false;
+static bool kc_i_state = false;
+static bool kc_o_state = false;
+
+void handle_homerow_mods(void) {
+  if (kc_a_state) {
+    register_code(KC_LGUI);
+	  unregister_code(KC_A);
+  }
+
+	if (kc_r_state) {
+    register_code(KC_LALT);
+	  unregister_code(KC_R);
+  }
+
+  if (kc_s_state) {
+    register_code(KC_LCTL);
+	  unregister_code(KC_S);
+  }
+
+	if (kc_t_state) {
+    register_code(KC_LSFT);
+	  unregister_code(KC_T);
+  }
+
+  if (kc_n_state) {
+    register_code(KC_RSFT);
+	  unregister_code(KC_N);
+  }
+
+	if (kc_e_state) {
+    register_code(KC_RCTL);
+	  unregister_code(KC_E);
+  }
+
+  if (kc_i_state) {
+    register_code(KC_RALT);
+	  unregister_code(KC_I);
+  }
+
+	if (kc_o_state) {
+    register_code(KC_RGUI);
+	  unregister_code(KC_O);
+  }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -211,6 +263,109 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         midi_octave_led = 2;
       }
       return true;
+
+    // home row handling for home row mod implementation
+    case KC_A:
+      if (record->event.pressed) {
+        kc_a_state = true;
+      }
+      else  {
+        kc_a_state = false;
+	unregister_code(KC_LGUI);
+      }
+      return true;
+
+    case KC_R:
+      if (record->event.pressed) {
+        kc_r_state = true;
+      }
+      else  {
+        kc_r_state = false;
+	unregister_code(KC_LALT);
+      }
+      return true;
+
+    case KC_S:
+      if (record->event.pressed) {
+        kc_s_state = true;
+      }
+      else  {
+        kc_s_state = false;
+	unregister_code(KC_LCTL);
+      }
+      return true;
+
+    case KC_T:
+      if (record->event.pressed) {
+        kc_t_state = true;
+      }
+      else  {
+        kc_t_state = false;
+	unregister_code(KC_LSFT);
+      }
+      return true;
+
+    case KC_N:
+      if (record->event.pressed) {
+        kc_n_state = true;
+      }
+      else  {
+        kc_n_state = false;
+	unregister_code(KC_RSFT);
+      }
+      return true;
+
+    case KC_E:
+      if (record->event.pressed) {
+        kc_e_state = true;
+      }
+      else  {
+        kc_e_state = false;
+	unregister_code(KC_RCTL);
+      }
+      return true;
+
+    case KC_I:
+      if (record->event.pressed) {
+        kc_i_state = true;
+      }
+      else  {
+        kc_i_state = false;
+	unregister_code(KC_RALT);
+      }
+      return true;
+
+    case KC_O:
+      if (record->event.pressed) {
+        kc_o_state = true;
+      }
+      else  {
+        kc_o_state = false;
+	unregister_code(KC_RGUI);
+      }
+      return true;
+
+    // mod key handling
+    case MOD:
+      if (record->event.pressed) {
+        handle_homerow_mods();
+	layer_on(_MOD);
+      }
+      else  {
+        layer_off(_MOD);
+      }
+      return false;
+
+    case ALT:
+      if (record->event.pressed) {
+        handle_homerow_mods();
+	layer_on(_ALT);
+      }
+      else  {
+        layer_off(_ALT);
+      }
+      return false;
+        
   }
   return true;
 }
