@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
     _______, _______, _______, _______, _______, _______, _______, KC_PSCR, KC_CAPS, KC_SLCK, KC_PAUS, _______,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, GAME,    MI_ON
+    RESET,   _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, _______, GAME,    MI_ON
 ),
 
 [_GAME_ALT] = LAYOUT_planck_grid(
