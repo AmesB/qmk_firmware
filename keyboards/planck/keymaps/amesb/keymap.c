@@ -22,7 +22,7 @@
 #define NAV_COLOR 0x00, 0x88, 0x00
 #define NUM_COLOR 0x00, 0x00, 0x88
 #define FUN_COLOR 0x00, 0x44, 0x44
-#define CAPS_COLOR 0x44, 0x00, 0x00
+#define CAPS_COLOR 0x0c, 0x00, 0x00
 #define MUS_COLOR 0x00, 0x00, 0x0c
 #define MIDI_COLOR 0x00, 0x0c, 0x0a
 #define OCTAVE_COLOR 0xaa, 0x00, 0x00
@@ -30,12 +30,8 @@
 enum planck_layers {
   _BASE,
   _GAME,
-  _GAMETWO,
-//  _MEDIA,
-  _NAV,
-//  _MOUSE,
-//  _SYM,
-  _NUM,
+  _ALT,
+  _MOD,
   _FUN,
   _GAME_ALT,
   _MUS,
@@ -51,52 +47,45 @@ enum planck_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_grid(
-    KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,              KC_LEFT, KC_RGHT, KC_J,              KC_L,         KC_U,         KC_Y,         KC_QUOT,
-    LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), KC_G,              KC_UP,   KC_DOWN, KC_M,              RSFT_T(KC_N), RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O),
-    KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,              KC_VOLD, KC_VOLU, KC_K,              KC_H,         KC_COMM,      KC_DOT,       KC_SLSH,
-    KC_ESC,       KC_DEL,       KC_BSPC,      KC_SPC,       LT(_NAV, KC_TAB),  XXXXXXX, XXXXXXX, LT(_NUM, KC_MINS), KC_CAPS,      KC_ENT,       MO(_FUN),     GAME
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
+    KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,     KC_M,     KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
+    KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
+    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  MO(_ALT), MO(_MOD), OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
 [_GAME] = LAYOUT_planck_grid(
-    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_LEFT, KC_RGHT, KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT,
-    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_DOWN, KC_UP,   KC_M,    KC_N,    KC_E,    KC_I,    KC_O,
-    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_VOLD, KC_VOLU, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,
-    KC_ESC,  KC_DEL,  KC_BSPC, KC_SPC,  KC_TAB,  MO(_NUM),KC_MINS, MO(_NUM),KC_CAPS, KC_ENT,  MO(_FUN),GAME_EXIT
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,          KC_J,    KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
+    KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,          KC_M,    KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
+    KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,          KC_K,    KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
+    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  MO(_GAME_ALT), KC_UP,   OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
-[_GAMETWO] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT,
-    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_ESC,  KC_DEL,  MO(_FUN),KC_LALT, KC_SPC,  MO(_GAME_ALT), KC_PSCR, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, GAME_EXIT
-),
-
-[_NAV] = LAYOUT_planck_grid(
+[_MOD] = LAYOUT_planck_grid(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
+    _______, LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), _______, _______, RSFT_T(KC_N),  RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O),	_______, 
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, XXXXXXX, MO(_FUN),_______, _______, _______, _______, _______
 ),
 
-[_NUM] = LAYOUT_planck_grid(
-    KC_SCLN, KC_EQL,  KC_LBRC, KC_RBRC, KC_GRV,  _______, _______, _______, _______, _______, _______, RESET,
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI,
-    KC_6,    KC_7,    KC_8,    KC_9,    KC_BSLS, _______, _______, _______, _______, _______, _______, _______,
-    XXXXXXX, XXXXXXX, MO(_FUN),KC_0,    KC_MINS, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+[_ALT] = LAYOUT_planck_grid(
+    KC_INS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+    KC_DEL,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
+    _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, _______, _______, _______, _______, MO(_FUN),XXXXXXX, _______, _______, _______, _______, _______
 ),
 
 [_FUN] = LAYOUT_planck_grid(
-    KC_PSCR, KC_SLCK, KC_PAUS, KC_F11,  KC_F12,  _______, _______, _______, _______, _______, _______, RESET,
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI,
-    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______, _______, _______, _______, _______,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MI_ON
+    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_PSCR, KC_CAPS, KC_SLCK, KC_PAUS, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, GAME,    MI_ON
 ),
 
 [_GAME_ALT] = LAYOUT_planck_grid(
-  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
-  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, _______, _______, KC_GRV,
-  KC_RSFT, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_BSLS, _______,
-  KC_RCTL, KC_INS,  KC_RGUI, KC_LALT, _______, _______, _______, _______, _______, KC_PGDN, KC_PGUP, _______
+  KC_1,    KC_2,    KC_UP,   KC_3,    KC_4,    KC_5,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+  KC_F1,   KC_LEFT, KC_DOWN, KC_RGHT, KC_F2,   KC_F3,  _______, _______, _______, _______, _______, _______,
+  KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+  _______, KC_F10,  KC_F11,  KC_F12, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 [_MUS] = LAYOUT_planck_grid(
@@ -124,12 +113,12 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, GAME_COLOR);
             }
             break;
-        case _NAV:
+        case _ALT:
             for (uint8_t i = 7; i <= 7; i++) {
                 rgb_matrix_set_color(i, NAV_COLOR);
             }
             break;
-        case _NUM:
+        case _MOD:
             for (uint8_t i = 2; i <= 2; i++) {
                 rgb_matrix_set_color(i, NUM_COLOR);
             }
