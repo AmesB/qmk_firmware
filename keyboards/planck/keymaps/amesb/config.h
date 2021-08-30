@@ -55,3 +55,7 @@
 
 // additional rgb options
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+
+// One Shot Mod configuration
+#define ONESHOT_TAP_TOGGLE 0
+#define ONESHOT_TIMEOUT 3000

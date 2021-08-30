@@ -23,6 +23,8 @@
 #define NUM_COLOR 0x00, 0x00, 0x88
 #define FUN_COLOR 0x00, 0x44, 0x44
 #define CAPS_COLOR 0x0c, 0x00, 0x00
+#define MACRO1_COLOR 0x0f, 0x0c, 0x00
+#define MACRO2_COLOR 0x09, 0x0a, 0x0c
 #define MUS_COLOR 0x00, 0x00, 0x0c
 #define MIDI_COLOR 0x00, 0x0c, 0x0a
 #define OCTAVE_COLOR 0xaa, 0x00, 0x00
@@ -52,14 +54,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,     KC_M,     KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
-    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  ALT,      ALT,      OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
+    KC_ESC,  KC_LPRN, KC_RPRN, DM_REC1, KC_SPC,  ALT,      ALT,      OSM(MOD_LSFT), DM_RSTP, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
 [_GAME] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,          KC_J,    KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,          KC_M,    KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,          KC_K,    KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
-    KC_ESC,  KC_LPRN, KC_RPRN, KC_LEFT, KC_SPC,  MO(_GAME_ALT), KC_UP,   OSM(MOD_LSFT), KC_RGHT, KC_LBRC, KC_RBRC, KC_ENT
+    KC_ESC,  KC_LPRN, KC_RPRN, DM_REC1, KC_SPC,  MO(_GAME_ALT), KC_UP,   OSM(MOD_LSFT), DM_RSTP, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
 [_MOD] = LAYOUT_planck_grid(
@@ -70,10 +72,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ALT] = LAYOUT_planck_grid(
-    KC_INS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-    KC_DEL,  OSM(MOD_LGUI), OSM(MOD_LALT), OSM(MOD_LCTL), OSM(MOD_LSFT), _______, _______, OSM(MOD_RSFT), OSM(MOD_RCTL), OSM(MOD_RALT), OSM(MOD_RGUI), _______,
-    _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, _______, _______, MO(_FUN), MO(_FUN),_______, _______, _______, _______, _______
+    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+    KC_DEL,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, DM_PLY1, DM_PLY2, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
+    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, _______, _______, DM_REC2, _______, MO(_FUN),MO(_FUN),_______, _______, DM_REC2, DM_PLY2, _______
 ),
 
 [_FUN] = LAYOUT_planck_grid(
@@ -101,12 +103,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MI_B_2,    MI_C_3,    MI_Cs_3,   MI_D_3,    MI_Ds_3,   MI_E_3,   MI_F_3,   MI_Fs_3,  MI_G_3,   MI_Gs_3,  MI_A_3,   MI_As_3,
     MI_B_1,    MI_C_2,    MI_Cs_2,   MI_D_2,    MI_Ds_2,   MI_E_2,   MI_F_2,   MI_Fs_2,  MI_G_2,   MI_Gs_2,  MI_A_2,   MI_As_2,
     MI_B,      MI_C_1,    MI_Cs_1,   MI_D_1,    MI_Ds_1,   MI_E_1,   MI_F_1,   MI_Fs_1,  MI_G_1,   MI_Gs_1,  MI_A_1,   MI_As_1,
-    MI_OCT_0,  MI_OCT_1,  MI_OCT_2,  MI_OCT_3,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    MI_ALLOFF, MI_OFF
+    MI_OCT_0,  MI_OCT_1,  MI_OCT_2,  MI_OCT_3,  KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    MI_ALLOFF, MI_OFF
 ),
 
 };
 
-int midi_octave_led = 7;
+static int midi_octave_led = 7;
+
+static int macro_id = 0;
+
+static bool kc_a_state = false;
+static bool kc_r_state = false;
+static bool kc_s_state = false;
+static bool kc_t_state = false;
+static bool kc_n_state = false;
+static bool kc_e_state = false;
+static bool kc_i_state = false;
+static bool kc_o_state = false;
+
+static bool kc_lgui_state = false;
+static bool kc_lalt_state = false;
+static bool kc_lctl_state = false;
+static bool kc_lsft_state = false;
+static bool kc_rsft_state = false;
+static bool kc_rctl_state = false;
+static bool kc_ralt_state = false;
+static bool kc_rgui_state = false;
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch(get_highest_layer(layer_state|default_layer_state)) {
@@ -153,56 +175,70 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
         }
     }
+    
+    if (macro_id == 1) {
+      rgb_matrix_set_color(6, MACRO1_COLOR);
+    }
+    if (macro_id == 2) {
+      rgb_matrix_set_color(5, MACRO2_COLOR);
+    }
 }
-
-static bool kc_a_state = false;
-static bool kc_r_state = false;
-static bool kc_s_state = false;
-static bool kc_t_state = false;
-static bool kc_n_state = false;
-static bool kc_e_state = false;
-static bool kc_i_state = false;
-static bool kc_o_state = false;
 
 void handle_homerow_mods(void) {
   if (kc_a_state) {
+    kc_a_state = false;
+    kc_lgui_state = true;
     register_code(KC_LGUI);
-	  unregister_code(KC_A);
+    unregister_code(KC_A);
   }
 
-	if (kc_r_state) {
+  if (kc_r_state) {
+    kc_r_state = false;
+    kc_lalt_state = true;
     register_code(KC_LALT);
-	  unregister_code(KC_R);
+    unregister_code(KC_R);
   }
 
   if (kc_s_state) {
+    kc_s_state = false;
+    kc_lctl_state = true;
     register_code(KC_LCTL);
-	  unregister_code(KC_S);
+    unregister_code(KC_S);
   }
 
-	if (kc_t_state) {
+  if (kc_t_state) {
+    kc_t_state = false;
+    kc_lsft_state = true;
     register_code(KC_LSFT);
-	  unregister_code(KC_T);
+    unregister_code(KC_T);
   }
 
   if (kc_n_state) {
+    kc_n_state = false;
+    kc_rsft_state = true;
     register_code(KC_RSFT);
-	  unregister_code(KC_N);
+    unregister_code(KC_N);
   }
 
-	if (kc_e_state) {
+  if (kc_e_state) {
+    kc_e_state = false;
+    kc_rctl_state = true;
     register_code(KC_RCTL);
-	  unregister_code(KC_E);
+    unregister_code(KC_E);
   }
 
   if (kc_i_state) {
+    kc_i_state = false;
+    kc_ralt_state = true;
     register_code(KC_RALT);
-	  unregister_code(KC_I);
+    unregister_code(KC_I);
   }
 
-	if (kc_o_state) {
+  if (kc_o_state) {
+    kc_o_state = false;
+    kc_rgui_state = true;
     register_code(KC_RGUI);
-	  unregister_code(KC_O);
+    unregister_code(KC_O);
   }
 }
 
@@ -264,6 +300,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
+    case DM_REC1:
+      if (record->event.pressed) {
+        macro_id = 1;
+      }
+      return true;
+    case DM_REC2:
+      if (record->event.pressed) {
+        macro_id = 2;
+      }
+      return true;
+    case DM_RSTP:
+      if (!record->event.pressed) {
+        macro_id = 0;
+      }
+      return true;
+
     // home row handling for home row mod implementation
     case KC_A:
       if (record->event.pressed) {
@@ -271,7 +323,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_a_state = false;
-	unregister_code(KC_LGUI);
+	if (kc_lgui_state) {
+	  unregister_code(KC_LGUI);
+	}
       }
       return true;
 
@@ -281,7 +335,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_r_state = false;
-	unregister_code(KC_LALT);
+	if (kc_lalt_state) {
+	  unregister_code(KC_LALT);
+        }
       }
       return true;
 
@@ -291,7 +347,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_s_state = false;
-	unregister_code(KC_LCTL);
+	if (kc_lctl_state) {
+	  unregister_code(KC_LCTL);
+        }
       }
       return true;
 
@@ -301,7 +359,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_t_state = false;
-	unregister_code(KC_LSFT);
+	if (kc_lsft_state) {
+	  unregister_code(KC_LSFT);
+        }
       }
       return true;
 
@@ -311,7 +371,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_n_state = false;
-	unregister_code(KC_RSFT);
+	if (kc_rsft_state) {
+	  unregister_code(KC_RSFT);
+        }
       }
       return true;
 
@@ -321,7 +383,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_e_state = false;
-	unregister_code(KC_RCTL);
+	if (kc_rctl_state) {
+	  unregister_code(KC_RCTL);
+        }
       }
       return true;
 
@@ -331,7 +395,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_i_state = false;
-	unregister_code(KC_RALT);
+	if (kc_ralt_state) {
+	  unregister_code(KC_RALT);
+        }
       }
       return true;
 
@@ -341,7 +407,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       else  {
         kc_o_state = false;
-	unregister_code(KC_RGUI);
+	if (kc_rgui_state) {
+	  unregister_code(KC_RGUI);
+        }
       }
       return true;
 
