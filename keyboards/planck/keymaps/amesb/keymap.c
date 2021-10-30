@@ -18,78 +18,64 @@
 #include "muse.h"
 
 // led color definitions
-#define GAME_COLOR 0x0a, 0x00, 0x0c
 #define NAV_COLOR 0x00, 0x88, 0x00
 #define NUM_COLOR 0x00, 0x00, 0x88
 #define FUN_COLOR 0x00, 0x44, 0x44
+#define COMPAT_COLOR 0x06, 0x00, 0x0c
 #define CAPS_COLOR 0x0c, 0x00, 0x00
-#define MACRO1_COLOR 0x0f, 0x0c, 0x00
-#define MACRO2_COLOR 0x09, 0x0a, 0x0c
 #define MUS_COLOR 0x00, 0x00, 0x0c
 #define MIDI_COLOR 0x00, 0x0c, 0x0a
 #define OCTAVE_COLOR 0xaa, 0x00, 0x00
 
 enum planck_layers {
   _BASE,
-  _GAME,
+  _COMPAT,
   _ALT,
-  _MOD,
+  _ALTC,
   _FUN,
-  _GAME_ALT,
   _MUS,
   _MIDI
 };
 
 enum planck_keycodes {
-  GAME = SAFE_RANGE,
-  GAME_EXIT,
-  MOD,
-  ALT
+  ALT = SAFE_RANGE
 };
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_MINS,
     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,     KC_M,     KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
-    KC_ESC,  KC_LPRN, KC_RPRN, DM_REC1, KC_SPC,  ALT,      ALT,      OSM(MOD_LSFT), DM_RSTP, KC_LBRC, KC_RBRC, KC_ENT
+    KC_DEL,  KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
+    KC_ESC,  KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,  ALT,      ALT,      OSM(MOD_LSFT), KC_PSCR, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
-[_GAME] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,          KC_J,    KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
-    KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,          KC_M,    KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_MINS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,          KC_K,    KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_EQL,
-    KC_ESC,  KC_LPRN, KC_RPRN, DM_REC1, KC_SPC,  MO(_GAME_ALT), KC_UP,   OSM(MOD_LSFT), DM_RSTP, KC_LBRC, KC_RBRC, KC_ENT
-),
-
-[_MOD] = LAYOUT_planck_grid(
+[_COMPAT] = LAYOUT_planck_grid(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, LGUI_T(KC_A), LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), _______, _______, RSFT_T(KC_N),  RCTL_T(KC_E), RALT_T(KC_I), RGUI_T(KC_O),	_______, 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, MO(_FUN),XXXXXXX, _______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, MO(_ALTC),MO(_ALTC),KC_LSFT, _______, _______, _______, _______
 ),
 
 [_ALT] = LAYOUT_planck_grid(
-    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-    KC_DEL,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, DM_PLY1, DM_PLY2, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
-    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, DM_REC2, _______, MO(_FUN),MO(_FUN),_______, _______, DM_REC2, DM_PLY2, _______
+    _______,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+    _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_PSCR, KC_CAPS, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
+    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_GRV,
+    _______, _______, _______, _______, _______, MO(_FUN),MO(_FUN),_______, _______, _______, _______, _______
+),
+
+[_ALTC] = LAYOUT_planck_grid(
+    _______,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+    _______, _______, _______, _______, _______, KC_PSCR, KC_CAPS, _______, _______, _______, _______, _______,
+    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_GRV,
+    _______, _______, _______, _______, _______, MO(_FUN),MO(_FUN),_______, _______, _______, _______, _______
 ),
 
 [_FUN] = LAYOUT_planck_grid(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
-    _______, _______, _______, _______, _______, _______, _______, KC_PSCR, KC_CAPS, KC_SLCK, KC_PAUS, _______,
-    RESET,   _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, _______, GAME,    MI_ON
-),
-
-[_GAME_ALT] = LAYOUT_planck_grid(
-  KC_1,    KC_2,    KC_UP,   KC_3,    KC_4,    KC_5,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-  KC_F1,   KC_LEFT, KC_DOWN, KC_RGHT, KC_F2,   KC_F3,  _______, _______, _______, _______, _______, _______,
-  KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-  _______, KC_F10,  KC_F11,  KC_F12, _______, _______, _______, _______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SLCK, KC_PAUS, _______,
+    RESET,   _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, _______, TG(_COMPAT), MI_ON
 ),
 
 [_MUS] = LAYOUT_planck_grid(
@@ -109,8 +95,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 static int midi_octave_led = 7;
-
-static int macro_id = 0;
 
 static bool kc_a_state = false;
 static bool kc_r_state = false;
@@ -132,19 +116,9 @@ static bool kc_rgui_state = false;
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch(get_highest_layer(layer_state|default_layer_state)) {
-        case _GAME:
-            for (uint8_t i = led_min; i <= led_max; i++) {
-                rgb_matrix_set_color(i, GAME_COLOR);
-            }
-            break;
         case _ALT:
             for (uint8_t i = 7; i <= 7; i++) {
                 rgb_matrix_set_color(i, NAV_COLOR);
-            }
-            break;
-        case _MOD:
-            for (uint8_t i = 2; i <= 2; i++) {
-                rgb_matrix_set_color(i, NUM_COLOR);
             }
             break;
         case _FUN:
@@ -155,6 +129,11 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         case _MUS:
             for (uint8_t i = led_min; i <= led_max; i++) {
                 rgb_matrix_set_color(i, MUS_COLOR);
+            }
+            break;
+        case _COMPAT:
+            for (uint8_t i = 8; i <= 8; i++) {
+                rgb_matrix_set_color(i, COMPAT_COLOR);
             }
             break;
         case _MIDI:
@@ -174,13 +153,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, CAPS_COLOR);
             }
         }
-    }
-    
-    if (macro_id == 1) {
-      rgb_matrix_set_color(6, MACRO1_COLOR);
-    }
-    if (macro_id == 2) {
-      rgb_matrix_set_color(5, MACRO2_COLOR);
     }
 }
 
@@ -245,18 +217,6 @@ void handle_homerow_mods(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // mode swaps
-    case GAME:
-      if (record->event.pressed) {
-        layer_on(_GAME);
-      }
-      return false;
-      break;
-    case GAME_EXIT:
-      if (record->event.pressed) {
-        layer_off(_GAME);
-      }
-      return false;
-      break;
     case MU_ON:
       if (record->event.pressed) {
         layer_on(_MUS);
@@ -300,22 +260,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-    case DM_REC1:
-      if (record->event.pressed) {
-        macro_id = 1;
-      }
-      return true;
-    case DM_REC2:
-      if (record->event.pressed) {
-        macro_id = 2;
-      }
-      return true;
-    case DM_RSTP:
-      if (!record->event.pressed) {
-        macro_id = 0;
-      }
-      return true;
-
     // home row handling for home row mod implementation
     case KC_A:
       if (record->event.pressed) {
@@ -325,6 +269,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_a_state = false;
 	if (kc_lgui_state) {
 	  unregister_code(KC_LGUI);
+	  kc_lgui_state = false;
 	}
       }
       return true;
@@ -337,6 +282,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_r_state = false;
 	if (kc_lalt_state) {
 	  unregister_code(KC_LALT);
+	  kc_lalt_state = false;
         }
       }
       return true;
@@ -349,6 +295,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_s_state = false;
 	if (kc_lctl_state) {
 	  unregister_code(KC_LCTL);
+	  kc_lctl_state = false;
         }
       }
       return true;
@@ -361,6 +308,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_t_state = false;
 	if (kc_lsft_state) {
 	  unregister_code(KC_LSFT);
+	  kc_lsft_state = false;
         }
       }
       return true;
@@ -373,6 +321,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_n_state = false;
 	if (kc_rsft_state) {
 	  unregister_code(KC_RSFT);
+	  kc_rsft_state = false;
         }
       }
       return true;
@@ -385,6 +334,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_e_state = false;
 	if (kc_rctl_state) {
 	  unregister_code(KC_RCTL);
+	  kc_rctl_state = false;
         }
       }
       return true;
@@ -397,6 +347,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_i_state = false;
 	if (kc_ralt_state) {
 	  unregister_code(KC_RALT);
+	  kc_ralt_state = false;
         }
       }
       return true;
@@ -409,21 +360,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         kc_o_state = false;
 	if (kc_rgui_state) {
 	  unregister_code(KC_RGUI);
+	  kc_rgui_state = false;
         }
       }
       return true;
 
     // mod key handling
-    case MOD:
-      if (record->event.pressed) {
-        handle_homerow_mods();
-	layer_on(_MOD);
-      }
-      else  {
-        layer_off(_MOD);
-      }
-      return false;
-
     case ALT:
       if (record->event.pressed) {
         handle_homerow_mods();
