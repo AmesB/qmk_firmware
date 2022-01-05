@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     KC_6,     KC_7,          KC_8,    KC_9,    KC_0,    KC_EQL,
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,     KC_J,     KC_L,          KC_U,    KC_Y,    KC_SCLN, KC_MINS,
     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,     KC_M,     KC_N,          KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_DEL,  KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_K,     KC_H,          KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
     KC_ESC,  KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,  ALT,      ALT,      OSM(MOD_LSFT), KC_PSCR, KC_LBRC, KC_RBRC, KC_ENT
 ),
 
@@ -65,17 +65,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ALT] = LAYOUT_preonic_grid(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    _______,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
     _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_MPLY, KC_CAPS, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
-    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, _______, _______, MO(_FUN),MO(_FUN),_______, _______, _______, _______, _______
+    _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_VOLD, KC_VOLU, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, KC_DEL,  KC_INS,  _______, _______, MO(_FUN),MO(_FUN),_______, _______, _______, _______, _______
 ),
 
 [_FUN] = LAYOUT_preonic_grid(
-    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    KC_F12,  KC_F13,   KC_F14,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
-    _______, _______, _______, _______, _______, KC_MPRV, KC_MNXT, _______, _______, KC_SLCK, KC_PAUS, _______,
+    _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_MPRV, KC_MNXT, _______, _______, KC_SLCK, KC_PAUS, _______,
     RESET,   _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, _______, GAME,    MI_ON
 ),
 
